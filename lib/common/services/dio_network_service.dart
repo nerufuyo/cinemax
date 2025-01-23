@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cinemax/common/constants/app_contant.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
@@ -15,6 +16,7 @@ class DioNetworkService extends GetxService {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
+          'Authorization': 'Bearer ${AppContant.apiKey}',
         },
       ),
     );
@@ -47,4 +49,6 @@ class DioNetworkService extends GetxService {
       rethrow;
     }
   }
+
+  Dio get dio => _dio;
 }
