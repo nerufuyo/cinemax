@@ -1,6 +1,7 @@
 import 'package:cinemax/common/extensions/col_row_gap_extension.dart';
 import 'package:cinemax/presentation/screens/screens.dart';
 import 'package:cinemax/presentation/widgets/movie_card_widget.dart';
+import 'package:cinemax/presentation/widgets/slider_highlight_movies_widget.dart';
 import 'package:cinemax/presentation/widgets/slider_popular_movies_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,7 @@ class MainScreen extends HomeScreen {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SliderPopularMoviesWidget(),
+          const SliderHightlightMoviesWidget(),
           MovieCardWidget(
             'Now Playing',
             controller.upcomingMovieList,

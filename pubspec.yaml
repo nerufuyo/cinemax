@@ -18,6 +18,7 @@ dependencies:
   flutter_dotenv: ^5.2.1
   either_dart: ^1.0.0
   carousel_slider: ^5.0.0
+  smooth_page_indicator: ^1.2.0+3
 
 dev_dependencies:
   flutter_test:

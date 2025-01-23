@@ -4,12 +4,14 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cinemax/common/extensions/get_interface_extension.dart';
 import 'package:cinemax/domain/entities/entitiy.dart';
 import 'package:cinemax/domain/repositories/movie_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   final MovieRepository _repository = Get.tryPut(MovieRepository());
   final CarouselSliderController carouselController =
       CarouselSliderController();
+  final PageController pageController = PageController();
 
   RxList<MovieResultEntity> popularMovieList = <MovieResultEntity>[].obs;
   RxList<MovieResultEntity> upcomingMovieList = <MovieResultEntity>[].obs;

@@ -23,7 +23,7 @@ class SliderPopularMoviesWidget extends GetView<HomeController> {
           children: [
             CarouselSlider(
               carouselController: controller.carouselController,
-              items: controller.popularMovieList.map((movie) {
+              items: controller.popularMovieList.take(5).map((movie) {
                 return Image.network(
                   'https://image.tmdb.org/t/p/w500${movie.posterPath}',
                   width: context.width,
