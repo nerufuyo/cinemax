@@ -17,6 +17,7 @@ dependencies:
   dio_cache_interceptor: ^3.5.1
   flutter_dotenv: ^5.2.1
   either_dart: ^1.0.0
+  carousel_slider: ^5.0.0
 
 dev_dependencies:
   flutter_test:

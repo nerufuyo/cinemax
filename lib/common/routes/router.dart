@@ -1,4 +1,4 @@
-import 'package:cinemax/common/constants/app_contant.dart';
+import 'package:cinemax/common/constants/app_constant.dart';
 import 'package:cinemax/common/routes/route_path.dart';
 import 'package:cinemax/common/services/dio_network_service.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ final GoRouter router = GoRouter(
       name: ScreenName.splash,
       path: RoutePath.splash,
       builder: (context, state) {
-        Get.put(DioNetworkService(AppContant.baseUrl));
+        Get.put(DioNetworkService(AppConstant.baseUrl));
         Get.put(SplashController());
         return const SplashScreen();
       },

@@ -1,4 +1,4 @@
-import 'package:cinemax/common/constants/app_contant.dart';
+import 'package:cinemax/common/constants/app_constant.dart';
 import 'package:cinemax/domain/entities/entitiy.dart';
 import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
@@ -10,24 +10,18 @@ class MovieRemoteData {
 
   MovieRemoteData();
 
-  Future<List<MovieEntity>> _fetchMovies(String endpoint) async {
-    final response = await _dio.get(
-      '${AppContant.baseUrl}/movie/$endpoint',
-      queryParameters: {'page': 1},
-    );
-    return (response.data['results'] as List)
-        .map((x) => MovieEntity.fromJson(x))
-        .toList();
+  Future<MovieEntity> _getRawMovies(String endpoint) async {
+    final response = await _dio.get('${AppConstant.baseUrl}/movie/$endpoint');
+    return MovieEntity.fromJson(response.data);
   }
 
-  Future<List<MovieEntity>> getUpcomingMovies() => _fetchMovies('upcoming');
-  Future<List<MovieEntity>> getTopRatedMovies() => _fetchMovies('top_rated');
-  Future<List<MovieEntity>> getPopularMovies() => _fetchMovies('popular');
-  Future<List<MovieEntity>> getNowPlayingMovies() =>
-      _fetchMovies('now_playing');
+  Future<MovieEntity> getRawUpcomingMovies() => _getRawMovies('upcoming');
+  Future<MovieEntity> getRawTopRatedMovies() => _getRawMovies('top_rated');
+  Future<MovieEntity> getRawPopularMovies() => _getRawMovies('popular');
+  Future<MovieEntity> getRawNowPlayingMovies() => _getRawMovies('now_playing');
 
-  Future<MovieEntity> getMovieDetail(int id) async {
-    final response = await _dio.get('${AppContant.baseUrl}/movie/$id');
+  Future<MovieEntity> getRawMovieDetail(int id) async {
+    final response = await _dio.get('${AppConstant.baseUrl}/movie/$id');
     return MovieEntity.fromJson(response.data);
   }
 }

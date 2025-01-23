@@ -1,3 +1,4 @@
+import 'package:cinemax/common/extensions/get_interface_extension.dart';
 import 'package:cinemax/common/utils/dartz_try_catch.dart';
 import 'package:cinemax/data/movie_remote_data.dart';
 import 'package:dartz/dartz.dart';
@@ -6,59 +7,47 @@ import 'package:get/get.dart';
 import '../entities/entitiy.dart';
 
 class MovieRepository {
-  final MovieRemoteData _movieRemoteData = Get.put(MovieRemoteData());
+  final MovieRemoteData _movieRemoteData = Get.tryPut(MovieRemoteData());
 
-  MovieRepository();
-
-  Future<Either<String, List<MovieEntity>>> getUpcomingMovies() =>
+  Future<Either<String, dynamic>> _fetchMovies(
+    Future<MovieEntity> Function() fetchMoviesFunction,
+    String errorMessage,
+  ) =>
       DartzTryCatch.network(() async {
-        final response = await _movieRemoteData.getUpcomingMovies();
+        final response = await fetchMoviesFunction();
 
-        if (response.isNotEmpty) {
-          return response;
+        if (response.results != null && response.results!.isNotEmpty) {
+          return response.results!;
         }
 
-        throw Exception('Get Upcoming Movies Failed!');
+        throw Exception(errorMessage);
       });
 
-  Future<Either<String, List<MovieEntity>>> getTopRatedMovies() =>
-      DartzTryCatch.network(() async {
-        final response = await _movieRemoteData.getTopRatedMovies();
+  Future<Either<String, dynamic>> getUpcomingMovies() => _fetchMovies(
+        _movieRemoteData.getRawUpcomingMovies,
+        'Get Upcoming Movies Failed!',
+      );
 
-        if (response.isNotEmpty) {
-          return response;
-        }
+  Future<Either<String, dynamic>> getTopRatedMovies() => _fetchMovies(
+        _movieRemoteData.getRawTopRatedMovies,
+        'Get Top Rated Movies Failed!',
+      );
 
-        throw Exception('Get Top Rated Movies Failed!');
-      });
+  Future<Either<String, dynamic>> getPopularMovies() => _fetchMovies(
+        _movieRemoteData.getRawPopularMovies,
+        'Get Popular Movies Failed!',
+      );
 
-  Future<Either<String, List<MovieEntity>>> getPopularMovies() =>
-      DartzTryCatch.network(() async {
-        final response = await _movieRemoteData.getPopularMovies();
-
-        if (response.isNotEmpty) {
-          return response;
-        }
-
-        throw Exception('Get Popular Movies Failed!');
-      });
-
-  Future<Either<String, List<MovieEntity>>> getNowPlayingMovies() =>
-      DartzTryCatch.network(() async {
-        final response = await _movieRemoteData.getNowPlayingMovies();
-
-        if (response.isNotEmpty) {
-          return response;
-        }
-
-        throw Exception('Get Now Playing Movies Failed!');
-      });
+  Future<Either<String, dynamic>> getNowPlayingMovies() => _fetchMovies(
+        _movieRemoteData.getRawNowPlayingMovies,
+        'Get Now Playing Movies Failed!',
+      );
 
   Future<Either<String, MovieEntity>> getMovieDetail(int id) =>
       DartzTryCatch.network(() async {
-        final response = await _movieRemoteData.getMovieDetail(id);
+        final response = await _movieRemoteData.getRawMovieDetail(id);
 
-        if (response.results.isNotEmpty) {
+        if (response.results!.isNotEmpty) {
           return response;
         }
 

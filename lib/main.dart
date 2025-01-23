@@ -1,4 +1,4 @@
-import 'package:cinemax/common/constants/app_contant.dart';
+import 'package:cinemax/common/constants/app_constant.dart';
 import 'package:cinemax/common/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: router,
-      title: AppContant.appName,
+      title: AppConstant.appName,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,

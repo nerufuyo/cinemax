@@ -8,11 +8,11 @@ MovieEntity movieEntityFromJson(String str) =>
 String movieEntityToJson(MovieEntity data) => json.encode(data.toJson());
 
 class MovieEntity {
-  final DateEntity dates;
-  final int page;
-  final List<MovieResultEntity> results;
-  final int totalPages;
-  final int totalResults;
+  final DateEntity? dates;
+  final int? page;
+  final List<MovieResultEntity>? results;
+  final int? totalPages;
+  final int? totalResults;
 
   MovieEntity({
     required this.dates,
@@ -23,18 +23,21 @@ class MovieEntity {
   });
 
   factory MovieEntity.fromJson(Map<String, dynamic> json) => MovieEntity(
-        dates: DateEntity.fromJson(json["dates"]),
+        dates:
+            json["dates"] != null ? DateEntity.fromJson(json["dates"]) : null,
         page: json["page"],
-        results: List<MovieResultEntity>.from(
-            json["results"].map((x) => MovieResultEntity.fromJson(x))),
+        results: json["results"] == null
+            ? null
+            : List<MovieResultEntity>.from(
+                json["results"].map((x) => MovieResultEntity.fromJson(x))),
         totalPages: json["total_pages"],
         totalResults: json["total_results"],
       );
 
   Map<String, dynamic> toJson() => {
-        "dates": dates.toJson(),
+        "dates": dates?.toJson(),
         "page": page,
-        "results": List<dynamic>.from(results.map((x) => x.toJson())),
+        "results": List<dynamic>.from(results!.map((x) => x.toJson())),
         "total_pages": totalPages,
         "total_results": totalResults,
       };

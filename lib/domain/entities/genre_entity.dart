@@ -1,6 +1,6 @@
 class GenreEntity {
-  final int id;
-  final String name;
+  final int? id;
+  final String? name;
 
   GenreEntity({
     required this.id,
