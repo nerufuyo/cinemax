@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 import '../../common/styles/style.dart';
 import '../controllers/contollers.dart';
 
-class SliderPopularMoviles extends GetView<HomeController> {
-  const SliderPopularMoviles({super.key});
+class SliderPopularMoviesWidget extends GetView<HomeController> {
+  const SliderPopularMoviesWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -12,6 +12,10 @@ class HomeController extends GetxController {
       CarouselSliderController();
 
   RxList<MovieResultEntity> popularMovieList = <MovieResultEntity>[].obs;
+  RxList<MovieResultEntity> upcomingMovieList = <MovieResultEntity>[].obs;
+  RxList<MovieResultEntity> nowPlayingMovieList = <MovieResultEntity>[].obs;
+  RxList<MovieResultEntity> topRatedMovieList = <MovieResultEntity>[].obs;
+
   RxInt currentIndex = 0.obs;
   RxInt currentCarouselMovieIndex = 0.obs;
 
@@ -24,7 +28,12 @@ class HomeController extends GetxController {
   }
 
   void initialize() {
-    getPopularMovies();
+    Future.wait([
+      getPopularMovies(),
+      getUpcomingMovies(),
+      getNowPlayingMovies(),
+      getTopRatedMovies(),
+    ]);
   }
 
   Future<void> getPopularMovies() async {
@@ -33,6 +42,33 @@ class HomeController extends GetxController {
     result.fold(
       (error) => log('Get Popular Movies Error: $error'),
       (data) => popularMovieList.value = data,
+    );
+  }
+
+  Future<void> getUpcomingMovies() async {
+    final result = await _repository.getUpcomingMovies();
+
+    result.fold(
+      (error) => log('Get Upcoming Movies Error: $error'),
+      (data) => upcomingMovieList.value = data,
+    );
+  }
+
+  Future<void> getNowPlayingMovies() async {
+    final result = await _repository.getNowPlayingMovies();
+
+    result.fold(
+      (error) => log('Get Now Playing Movies Error: $error'),
+      (data) => nowPlayingMovieList.value = data,
+    );
+  }
+
+  Future<void> getTopRatedMovies() async {
+    final result = await _repository.getTopRatedMovies();
+
+    result.fold(
+      (error) => log('Get Top Rated Movies Error: $error'),
+      (data) => topRatedMovieList.value = data,
     );
   }
 }

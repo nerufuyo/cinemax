@@ -36,6 +36,7 @@ class HomeScreen extends GetView<HomeController> {
                 (index) {
                   final item = homeBottomNavItems[index];
                   return BottomNavigationBarItem(
+                    backgroundColor: Colors.transparent,
                     icon: Padding(
                       padding: const EdgeInsets.only(top: 8, bottom: 4),
                       child: Image.asset(
