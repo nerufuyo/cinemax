@@ -19,9 +19,23 @@ class MovieCardWidget extends GetView<HomeController> {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 16),
-            child: Text(
-              title,
-              style: AppTypography.h1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style: AppTypography.h1,
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'See All',
+                    style: AppTypography.h3.copyWith(
+                      color: AppColorPallete.secondaryColor,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           if (movieLists.isNotEmpty)

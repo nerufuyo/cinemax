@@ -19,8 +19,8 @@ class HomeScreen extends GetView<HomeController> {
         bottomNavigationBar: ClipRRect(
           child: BackdropFilter(
             filter: ImageFilter.blur(
-              sigmaX: 10,
-              sigmaY: 10,
+              sigmaX: 500,
+              sigmaY: 500,
               tileMode: TileMode.repeated,
             ),
             child: BottomNavigationBar(
