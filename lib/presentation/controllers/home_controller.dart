@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cinemax/common/extensions/get_interface_extension.dart';
 import 'package:cinemax/domain/entities/entitiy.dart';
 import 'package:cinemax/domain/repositories/movie_repository.dart';
@@ -7,8 +8,12 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   final MovieRepository _repository = Get.tryPut(MovieRepository());
-  RxList<MovieResultEntity> movies = <MovieResultEntity>[].obs;
+  final CarouselSliderController carouselController =
+      CarouselSliderController();
+
+  RxList<MovieResultEntity> popularMovieList = <MovieResultEntity>[].obs;
   RxInt currentIndex = 0.obs;
+  RxInt currentCarouselMovieIndex = 0.obs;
 
   void changeIndex(int index) => currentIndex.value = index;
 
@@ -27,7 +32,7 @@ class HomeController extends GetxController {
 
     result.fold(
       (error) => log('Get Popular Movies Error: $error'),
-      (data) => movies.value = data,
+      (data) => popularMovieList.value = data,
     );
   }
 }
