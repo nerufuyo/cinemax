@@ -1,8 +1,8 @@
 class ProductionCompanyEntity {
-  final int id;
-  final String logoPath;
-  final String name;
-  final String originCountry;
+  final int? id;
+  final String? logoPath;
+  final String? name;
+  final String? originCountry;
 
   ProductionCompanyEntity({
     required this.id,
@@ -13,10 +13,10 @@ class ProductionCompanyEntity {
 
   factory ProductionCompanyEntity.fromJson(Map<String, dynamic> json) =>
       ProductionCompanyEntity(
-        id: json["id"],
-        logoPath: json["logo_path"],
-        name: json["name"],
-        originCountry: json["origin_country"],
+        id: json["id"] ?? 0,
+        logoPath: json["logo_path"] ?? '',
+        name: json["name"] ?? '',
+        originCountry: json["origin_country"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {

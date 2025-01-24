@@ -62,49 +62,51 @@ class MovieResultEntity {
   factory MovieResultEntity.fromJson(Map<String, dynamic> json) =>
       MovieResultEntity(
         adult: json["adult"] ?? false,
-        backdropPath: json["backdrop_path"],
-        belongsToCollection: json["belongs_to_collection"],
+        backdropPath: json["backdrop_path"] ?? '', // Default to empty string
+        belongsToCollection: json["belongs_to_collection"] ?? '', // Nullable
         budget: json["budget"] ?? 0,
-        genres: json["genres"] != null
-            ? List<GenreEntity>.from(
-                json["genres"].map((x) => GenreEntity.fromJson(x)))
-            : [],
-        genreIds: json["genre_ids"] != null
-            ? List<int>.from(json["genre_ids"].map((x) => x))
-            : [],
-        homepage: json["homepage"],
+        genres: (json["genres"] as List<dynamic>?)
+                ?.map((x) => GenreEntity.fromJson(x))
+                .toList() ??
+            [], // Default to empty list
+        genreIds: (json["genre_ids"] as List<dynamic>?)
+                ?.map((x) => x as int)
+                .toList() ??
+            [], // Default to empty list
+        homepage: json["homepage"] ?? '', // Default to empty string
         id: json["id"] ?? 0,
-        imdbId: json["imdb_id"],
-        originCountry: json["origin_country"] != null
-            ? List<String>.from(json["origin_country"].map((x) => x))
-            : [],
+        imdbId: json["imdb_id"] ?? '', // Default to empty string
+        originCountry: (json["origin_country"] as List<dynamic>?)
+                ?.map((x) => x as String)
+                .toList() ??
+            [], // Default to empty list
         originalLanguage: json["original_language"] ?? '',
         originalTitle: json["original_title"] ?? '',
         overview: json["overview"] ?? '',
-        popularity: json["popularity"]?.toDouble() ?? 0.0,
-        posterPath: json["poster_path"],
-        productionCompanies: json["production_companies"] != null
-            ? List<ProductionCompanyEntity>.from(json["production_companies"]
-                .map((x) => ProductionCompanyEntity.fromJson(x)))
-            : [],
-        productionCountries: json["production_countries"] != null
-            ? List<ProductionCountryEntity>.from(json["production_countries"]
-                .map((x) => ProductionCountryEntity.fromJson(x)))
-            : [],
+        popularity: (json["popularity"] as num?)?.toDouble() ?? 0.0,
+        posterPath: json["poster_path"] ?? '', // Default to empty string
+        productionCompanies: (json["production_companies"] as List<dynamic>?)
+                ?.map((x) => ProductionCompanyEntity.fromJson(x))
+                .toList() ??
+            [], // Default to empty list
+        productionCountries: (json["production_countries"] as List<dynamic>?)
+                ?.map((x) => ProductionCountryEntity.fromJson(x))
+                .toList() ??
+            [], // Default to empty list
         releaseDate: json["release_date"] != null
             ? DateTime.tryParse(json["release_date"]) ?? DateTime(1970, 1, 1)
-            : DateTime(1970, 1, 1),
+            : DateTime(1970, 1, 1), // Safe fallback
         revenue: json["revenue"] ?? 0,
         runtime: json["runtime"] ?? 0,
-        spokenLanguages: json["spoken_languages"] != null
-            ? List<SpokenLanguageEntity>.from(json["spoken_languages"]
-                .map((x) => SpokenLanguageEntity.fromJson(x)))
-            : [],
+        spokenLanguages: (json["spoken_languages"] as List<dynamic>?)
+                ?.map((x) => SpokenLanguageEntity.fromJson(x))
+                .toList() ??
+            [], // Default to empty list
         status: json["status"] ?? '',
         tagline: json["tagline"] ?? '',
         title: json["title"] ?? '',
         video: json["video"] ?? false,
-        voteAverage: json["vote_average"]?.toDouble() ?? 0.0,
+        voteAverage: (json["vote_average"] as num?)?.toDouble() ?? 0.0,
         voteCount: json["vote_count"] ?? 0,
       );
 

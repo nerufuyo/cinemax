@@ -1,6 +1,6 @@
 class ProductionCountryEntity {
-  final String iso31661;
-  final String name;
+  final String? iso31661;
+  final String? name;
 
   ProductionCountryEntity({
     required this.iso31661,
@@ -9,8 +9,8 @@ class ProductionCountryEntity {
 
   factory ProductionCountryEntity.fromJson(Map<String, dynamic> json) =>
       ProductionCountryEntity(
-        iso31661: json["iso_3166_1"],
-        name: json["name"],
+        iso31661: json["iso_3166_1"] ?? '',
+        name: json["name"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {

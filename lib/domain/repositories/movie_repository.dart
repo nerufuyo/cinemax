@@ -43,11 +43,11 @@ class MovieRepository {
         'Get Now Playing Movies Failed!',
       );
 
-  Future<Either<String, MovieEntity>> getMovieDetail(int id) =>
+  Future<Either<String, dynamic>> getMovieDetail(String id) =>
       DartzTryCatch.network(() async {
         final response = await _movieRemoteData.getRawMovieDetail(id);
 
-        if (response.results!.isNotEmpty) {
+        if (response.id != null) {
           return response;
         }
 

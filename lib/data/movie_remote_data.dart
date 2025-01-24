@@ -20,8 +20,8 @@ class MovieRemoteData {
   Future<MovieEntity> getRawPopularMovies() => _getRawMovies('popular');
   Future<MovieEntity> getRawNowPlayingMovies() => _getRawMovies('now_playing');
 
-  Future<MovieEntity> getRawMovieDetail(int id) async {
+  Future<MovieResultEntity> getRawMovieDetail(String id) async {
     final response = await _dio.get('${AppConstant.baseUrl}/movie/$id');
-    return MovieEntity.fromJson(response.data);
+    return MovieResultEntity.fromJson(response.data);
   }
 }

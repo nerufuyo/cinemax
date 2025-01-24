@@ -37,13 +37,5 @@ final GoRouter router = GoRouter(
         return const HomeScreen();
       },
     ),
-    GoRoute(
-      name: ScreenName.detail,
-      path: RoutePath.detail,
-      builder: (context, state) {
-        Get.put(DetailController());
-        return const DetailScreen();
-      },
-    ),
   ],
 );

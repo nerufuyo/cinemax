@@ -89,25 +89,37 @@ class SliderPopularMoviesWidget extends GetView<HomeController> {
                           Container(
                             margin: const EdgeInsets.only(top: 16),
                             padding: const EdgeInsets.symmetric(
-                              horizontal: 48,
+                              horizontal: 58,
                               vertical: 16,
                             ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(80),
                               gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
+                                begin: Alignment.bottomRight,
+                                end: Alignment.topLeft,
                                 colors: [
                                   AppColorPallete.ternaryColor,
                                   AppColorPallete.ternaryColor,
+                                  AppColorPallete.secondaryColor,
+                                  AppColorPallete.secondaryColor,
                                 ],
                               ),
                             ),
-                            child: Text(
-                              'Watch Now',
-                              style: AppTypography.body1.copyWith(
-                                color: Colors.white,
-                                fontSize: 20,
+                            child: InkWell(
+                              onTap: () => controller.showDetail(
+                                context,
+                                controller
+                                    .popularMovieList[controller
+                                        .currentCarouselMovieIndex.value]
+                                    .id
+                                    .toString(),
+                              ),
+                              child: Text(
+                                'Watch Now',
+                                style: AppTypography.body1.copyWith(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
                               ),
                             ),
                           ),

@@ -49,7 +49,10 @@ class MovieCardWidget extends GetView<HomeController> {
                 itemCount: movieLists.length,
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: () {},
+                    onTap: () => controller.showDetail(
+                      context,
+                      movieLists[index].id.toString(),
+                    ),
                     child: Container(
                       width: 120,
                       height: 180,

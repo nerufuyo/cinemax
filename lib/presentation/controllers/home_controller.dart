@@ -4,8 +4,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cinemax/common/extensions/get_interface_extension.dart';
 import 'package:cinemax/domain/entities/entitiy.dart';
 import 'package:cinemax/domain/repositories/movie_repository.dart';
+import 'package:cinemax/presentation/controllers/detail_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../screens/screens.dart';
 
 class HomeController extends GetxController {
   final MovieRepository _repository = Get.tryPut(MovieRepository());
@@ -71,6 +74,28 @@ class HomeController extends GetxController {
     result.fold(
       (error) => log('Get Top Rated Movies Error: $error'),
       (data) => topRatedMovieList.value = data,
+    );
+  }
+
+  void showDetail(
+    BuildContext context,
+    String movieId,
+  ) {
+    Get.tryPut(DetailController());
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return Container(
+          margin: const EdgeInsets.all(12),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: DetailScreen(
+              movieId: movieId,
+            ),
+          ),
+        );
+      },
     );
   }
 }

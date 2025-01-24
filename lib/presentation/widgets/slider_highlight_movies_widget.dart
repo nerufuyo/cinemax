@@ -10,20 +10,25 @@ class SliderHightlightMoviesWidget extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Align(
-          alignment: Alignment.bottomCenter,
-          child: AnimatedSmoothIndicator(
-            activeIndex: controller.currentCarouselMovieIndex.value,
-            count: controller.popularMovieList.length > 5
-                ? 5
-                : controller.popularMovieList.length,
-            effect: WormEffect(
-              dotWidth: context.width * 0.05,
-              dotHeight: 8,
-              activeDotColor: AppColorPallete.secondaryColor,
-              dotColor: Colors.grey,
-            ),
+    return Obx(() {
+      if (controller.popularMovieList.isEmpty) {
+        return const SizedBox();
+      }
+      return Align(
+        alignment: Alignment.bottomCenter,
+        child: AnimatedSmoothIndicator(
+          activeIndex: controller.currentCarouselMovieIndex.value,
+          count: controller.popularMovieList.length > 5
+              ? 5
+              : controller.popularMovieList.length,
+          effect: WormEffect(
+            dotWidth: context.width * 0.05,
+            dotHeight: 8,
+            activeDotColor: AppColorPallete.secondaryColor,
+            dotColor: Colors.grey,
           ),
-        ));
+        ),
+      );
+    });
   }
 }
