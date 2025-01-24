@@ -25,12 +25,12 @@ class MovieRemoteData {
     return MovieResultEntity.fromJson(response.data);
   }
 
-  Future<SearchMovieEntity> getRawMovieByKeyword(String query) async {
+  Future<MovieEntity> getRawMovieByKeyword(String query) async {
     final response = await _dio.get(
-      '${AppConstant.baseUrl}/search/keyword',
+      '${AppConstant.baseUrl}/search/movie',
       queryParameters: {'query': query},
     );
 
-    return SearchMovieEntity.fromJson(response.data);
+    return MovieEntity.fromJson(response.data);
   }
 }

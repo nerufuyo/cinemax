@@ -20,7 +20,7 @@ class HomeController extends GetxController {
   RxList<MovieResultEntity> upcomingMovieList = <MovieResultEntity>[].obs;
   RxList<MovieResultEntity> nowPlayingMovieList = <MovieResultEntity>[].obs;
   RxList<MovieResultEntity> topRatedMovieList = <MovieResultEntity>[].obs;
-  RxList<SearchMovieListEntity> searchMovieList = <SearchMovieListEntity>[].obs;
+  RxList<MovieResultEntity> searchMovieList = <MovieResultEntity>[].obs;
 
   RxInt currentIndex = 0.obs;
   RxInt currentCarouselMovieIndex = 0.obs;

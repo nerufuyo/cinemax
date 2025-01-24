@@ -37,7 +37,7 @@ class SearchScreen extends HomeScreen {
               onTap: () => controller.showDetail(context, movie.id.toString()),
               child: ListTile(
                 title: Text(
-                  movie.name.toString(),
+                  movie.title.toString(),
                   style: AppTypography.h3,
                 ),
 
