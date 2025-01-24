@@ -27,7 +27,7 @@ class MovieRemoteData {
 
   Future<SearchMovieEntity> getRawMovieByKeyword(String query) async {
     final response = await _dio.get(
-      '${AppConstant.baseUrl}/search/movie',
+      '${AppConstant.baseUrl}/search/keyword',
       queryParameters: {'query': query},
     );
 
