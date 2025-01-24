@@ -1,14 +1,17 @@
 import 'dart:developer';
 
+import 'package:cinemax/common/constants/app_constant.dart';
 import 'package:cinemax/common/extensions/get_interface_extension.dart';
 import 'package:cinemax/common/routes/router.dart';
 import 'package:cinemax/domain/entities/entitiy.dart';
 import 'package:cinemax/domain/repositories/movie_repository.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:video_player/video_player.dart';
 
 class DetailController extends GetxController {
   final MovieRepository _repository = Get.tryPut(MovieRepository());
+  late VideoPlayerController videoPlayerController;
 
   RxList<MovieResultEntity> upcomingMovieList = <MovieResultEntity>[].obs;
   RxMap<String, MovieResultEntity> movieDetail =
@@ -22,6 +25,13 @@ class DetailController extends GetxController {
   }
 
   void initialize() {
+    videoPlayerController = VideoPlayerController.networkUrl(
+      Uri.parse(AppConstant.defaultTeaser),
+    )..initialize().then((_) {
+        videoPlayerController.play();
+        videoPlayerController.setLooping(true);
+        videoPlayerController.setPlaybackSpeed(4.0);
+      });
     Future.delayed(const Duration(milliseconds: 500), () {
       log('Movie ID: ${movieId.value}');
       Future.wait([

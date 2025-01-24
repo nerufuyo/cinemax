@@ -5,5 +5,5 @@ class AppConstant {
   static String baseUrl = dotenv.env['BASE_URL']!;
   static String apiKey = dotenv.env['API_READ_ACCESS_TOKEN']!;
   static String defaultTeaser =
-      'https://youtu.be/FN03zZRHSHA?si=I9VLZYrBzf5RlHZa';
+      'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
 }

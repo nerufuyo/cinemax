@@ -2,6 +2,7 @@ import 'package:cinemax/common/extensions/col_row_gap_extension.dart';
 import 'package:cinemax/presentation/widgets/movie_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:video_player/video_player.dart';
 import '../../common/styles/style.dart';
 import '../controllers/contollers.dart';
 
@@ -59,11 +60,9 @@ class DetailScreen extends GetView<DetailController> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: Image.network(
-                  'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-                  width: context.width,
-                  height: context.height * 0.35,
-                  fit: BoxFit.cover,
+                child: AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: VideoPlayer(controller.videoPlayerController),
                 ),
               ),
               Text(
