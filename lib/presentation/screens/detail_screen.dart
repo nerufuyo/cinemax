@@ -57,6 +57,15 @@ class DetailScreen extends GetView<DetailController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.network(
+                  'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                  width: context.width,
+                  height: context.height * 0.35,
+                  fit: BoxFit.cover,
+                ),
+              ),
               Text(
                 movie.title.toString(),
                 style: AppTypography.h1,
