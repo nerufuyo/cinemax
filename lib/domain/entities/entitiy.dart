@@ -6,3 +6,5 @@ export 'genre_entity.dart';
 export 'production_company_entity.dart';
 export 'production_country_entity.dart';
 export 'spoken_language_entity.dart';
+export 'search_movie_entity.dart';
+export 'search_movie_list_entity.dart';

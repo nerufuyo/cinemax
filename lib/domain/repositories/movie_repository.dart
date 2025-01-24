@@ -44,13 +44,28 @@ class MovieRepository {
       );
 
   Future<Either<String, dynamic>> getMovieDetail(String id) =>
-      DartzTryCatch.network(() async {
-        final response = await _movieRemoteData.getRawMovieDetail(id);
+      DartzTryCatch.network(
+        () async {
+          final response = await _movieRemoteData.getRawMovieDetail(id);
 
-        if (response.id != null) {
-          return response;
-        }
+          if (response.id != null) {
+            return response;
+          }
 
-        throw Exception('Get Movie Detail Failed!');
-      });
+          throw Exception('Get Movie Detail Failed!');
+        },
+      );
+
+  Future<Either<String, dynamic>> getMovieByKeyword(String query) =>
+      DartzTryCatch.network(
+        () async {
+          final response = await _movieRemoteData.getRawMovieByKeyword(query);
+
+          if (response.results != null && response.results!.isNotEmpty) {
+            return response.results!;
+          }
+
+          throw Exception('Get Movie By Keyword Failed!');
+        },
+      );
 }

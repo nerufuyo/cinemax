@@ -14,12 +14,13 @@ class HomeController extends GetxController {
   final MovieRepository _repository = Get.tryPut(MovieRepository());
   final CarouselSliderController carouselController =
       CarouselSliderController();
-  final PageController pageController = PageController();
+  final TextEditingController searchController = TextEditingController();
 
   RxList<MovieResultEntity> popularMovieList = <MovieResultEntity>[].obs;
   RxList<MovieResultEntity> upcomingMovieList = <MovieResultEntity>[].obs;
   RxList<MovieResultEntity> nowPlayingMovieList = <MovieResultEntity>[].obs;
   RxList<MovieResultEntity> topRatedMovieList = <MovieResultEntity>[].obs;
+  RxList<SearchMovieListEntity> searchMovieList = <SearchMovieListEntity>[].obs;
 
   RxInt currentIndex = 0.obs;
   RxInt currentCarouselMovieIndex = 0.obs;
@@ -74,6 +75,15 @@ class HomeController extends GetxController {
     result.fold(
       (error) => log('Get Top Rated Movies Error: $error'),
       (data) => topRatedMovieList.value = data,
+    );
+  }
+
+  Future<void> getMovieByKeyword(String query) async {
+    final result = await _repository.getMovieByKeyword(query);
+
+    result.fold(
+      (error) => log('Get Movie By Keyword Error: $error'),
+      (data) => searchMovieList.value = data,
     );
   }
 
